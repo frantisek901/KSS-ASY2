@@ -58,7 +58,7 @@ table_as_tibble = function(data, var1, var2) {
     # v objektech 'var1' a 'var2' a koneènì, víme, že hodnoty jsou ve "Freq".
     # Mùžeme to tedy celé v klidu reshapovat pomocí 'pivot_wider()'
     pivot_wider(id_cols = Var1, names_from = Var2, values_from = Freq,
-                names_prefix = paste0(var2, "::")) %>%  # Zajistí, aby se pøed sloupeèky
+                names_prefix = paste0(var2, "::")) %>%  # Zajistí, aby se pøed kategorie v názvu sloupeèku napsal i název pùvodní druhé promìnné.
 
     # Nakonec první sloupeèek tabulky pøejmenujeme pomocí vlastní funkce 'prejmenuj()' tak,
     # aby nesl název pùvodní první promìnné:
