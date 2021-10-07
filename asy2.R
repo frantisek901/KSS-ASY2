@@ -9,7 +9,7 @@
 # =========
 # 1) Cílem je vybrat z vyèištìných dat promìnné potøebné pro jednotlivé skupiny. DONE!
 # 2) Vyøešit pøevedení tabulky na tibble a uložení do Excelu. DONE!
-# 3) Pøíprava promìnných pro analýzu
+# 3) Pøíprava promìnných pro analýzu ... ještì jsme nezaèali :-)
 #
 
 
