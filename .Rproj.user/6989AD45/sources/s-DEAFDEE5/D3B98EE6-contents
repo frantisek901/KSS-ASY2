@@ -1,0 +1,140 @@
+#### Práce v kurzu KSS/ASY2
+
+
+## Encoding: windows-1250
+## Vytvořil: 2021-10-07 FrK
+## Upravil:  2021-10-07 FrK
+
+# Poznámky:
+# =========
+# 1) Cílem je vybrat z vyčištěných dat proměnné potřebné pro jednotlivé skupiny.
+# 2) Vyřešit převedení tabulky na tibble a uložení do Excelu
+# 3) Příprava proměnných pro analýzu
+#
+
+
+# ## Hlavička -------------------------------------------------------------
+
+# Smazání paměti
+rm(list=ls())
+
+# Načtení packagí
+library(dplyr)
+library(tidyr)
+library(tibble)
+library(sjmisc)
+library(stringr)
+library(forcats)
+library(ggplot2)
+library(stargazer)
+library(readxl)
+library(writexl)
+# source("D:/owncloud2/mujskript.R")  # Funguje pouze mně, studenty tím nebudeme trápit.
+
+# Načtení dat
+# load("bezDomova2021.RData")  # Také funguje pouze mně, studenty tím nebudu trápit.
+
+
+# Vlastní funkce ----------------------------------------------------------
+
+# Nejprve potřebujeme vlastní funkci na přejmenování, která začlení 'names()' do 'tidyverse'
+prejmenuj = function(data, pos, newNames){
+  names(data)[pos] = newNames
+  data
+}
+
+
+# Funkce, která ze dvou proměnných udělá frekvenční tabulku třídění 2. stupně a
+# výsledek vrátí jako tibble
+table_as_tibble = function(data, var1, var2) {
+
+  # Aby funkce pracovala, potřebuje načíst package 'tidyr'
+  library(tidyr)
+
+  # Jádro, vytvoření vlastní tabulky:
+  table(data[[var1]], data[[var2]], useNA = "ifany") %>%
+
+    # Převedení tabulky na data.frame, protože s tibble to není úplně jednoduché:
+    as.data.frame() %>%
+
+    # Tak a teď víme, že jedna proměnná je "Var1", druhá "Var2", máme i jejich původní jména
+    # v objektech 'var1' a 'var2' a konečně, víme, že hodnoty jsou ve "Freq".
+    # Můžeme to tedy celé v klidu reshapovat pomocí 'pivot_wider()'
+    pivot_wider(id_cols = Var1, names_from = Var2, values_from = Freq,
+                names_prefix = paste0(var2, "::")) %>%  # Zajistí, aby se před sloupečky
+
+    # Nakonec první sloupeček tabulky přejmenujeme pomocí vlastní funkce 'prejmenuj()' tak,
+    # aby nesl název původní první proměnné:
+    prejmenuj(1, var1)
+}
+
+
+# Tým Lucie ---------------------------------------------------------------
+
+# Dluhy --> Pracovní morálka
+
+library(dplyr)
+library(readxl)
+library(writexl)
+
+Lucie = select(dfb, Nízkopráh.Kde, Dluhy, Přehled, starts_with("Pracoval"),
+               ends_with(".Za80"), ends_with(".Výdrž"), Telefon.Sdělil)
+
+write_xlsx(Lucie, "dataC.xlsx")
+dfl = read_xlsx("dataC.xlsx")
+
+table(dfl$`Práce-Stavba.Výdrž`, dfl$Dluhy, useNA = "ifany")
+tb = table_as_tibble(data = dfl, var1 = "Práce-Stavba.Výdrž", var2 = "Dluhy")
+write_xlsx(tb, "tab1.xlsx")
+
+
+
+# Tým Vojta ---------------------------------------------------------------
+
+# Sociální kapitál --> Alkohol
+
+# Sociální kapitál = Počty přátel na ulici a v bydlení
+# Alkohol = Kolik + Jak často
+# Kontext: Doba, Věk, Partner
+
+library(dplyr)
+library(readxl)
+library(writexl)
+
+
+Vojta = select(dfb, Věk, Pije, Pije.Kolik, Prevalence, Partner, Přátelé.BezDomova, starts_with("Přátelé.Byd"),
+               starts_with("Kontakt."), Pohlaví, Doba)
+
+write_xlsx(Vojta, "dataA.xlsx")
+dfv = read_xlsx("dataA.xlsx")
+
+table(dfv$Přátelé.BezDomova, dfv$Prevalence, useNA = "ifany")
+tb = table_as_tibble(dfv,  "Přátelé.BezDomova", "Prevalence")
+write_xlsx(tb, "tab2.xlsx")
+
+
+
+# Tým Lukáš ---------------------------------------------------------------
+
+# Alkohol + Drogy --> Důvěra(?) a Kontakt(?)
+# Sociální kapitál = Nocování + Kdo jim pomáhá
+# Drogy = Co všechno bere
+
+
+library(dplyr)
+library(readxl)
+library(writexl)
+
+
+Lukáš = select(dfb, Pije, Pije.Kolik, Prevalence, Sebevnímání.Látky, ends_with(".Užívá"),
+               ends_with(".Nejčastěji"), starts_with("Pomoc."), -ends_with(".Výpis"), Nocování)
+
+write_xlsx(Lukáš, "dataB.xlsx")
+dfl = read_xlsx("dataB.xlsx")
+
+table(dfl$Pije, dfl$Sebevnímání.Látky, useNA = "ifany")
+tb = table_as_tibble(dfl, "Sebevnímání.Látky", "Pije")
+write_xlsx(tb, "tab3.xlsx")
+
+
+

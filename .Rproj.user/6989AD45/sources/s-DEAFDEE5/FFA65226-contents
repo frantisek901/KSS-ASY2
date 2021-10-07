@@ -1,0 +1,26 @@
+#### Skript na rozdělení 17 studentů do 3 skupin A, B, C
+
+## Encoding: windows-1250
+## Vytvořil: 2021-09-20 FrK
+## Upravil:  2021-09-20 FrK
+
+## NOTES:
+#  Zatím nic...
+
+library(readxl)
+library(writexl)
+library(dplyr)
+library(tibble)
+
+## Nejdřív načtu seznam studujících a vezmu jen jméno a st. číslo:
+studujici = read_xls("seznamStudujicich.xls") %>% select(1:3)
+
+## Pak si vytvořím marker pro skupiny
+skupiny = c(rep("A", 6), rep("B", 6), rep("C", 5)) %>% sample(., length(.))
+# skupiny
+
+## Vytvořím si seznam studujících včetně studijní skupiny:
+seznam = tibble(studujici, skupina = skupiny) %>% arrange(skupina, prijmeni)
+
+## Uložení seznamu:
+write_xlsx(seznam, "seznamStudujicich.xlsx")
