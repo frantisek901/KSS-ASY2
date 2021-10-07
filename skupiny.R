@@ -7,6 +7,7 @@
 ## NOTES:
 #  Zatím nic...
 
+
 library(readxl)
 library(writexl)
 library(dplyr)

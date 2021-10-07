@@ -3,7 +3,7 @@
     "path": "D:/ownCloud2/!!!Vyuka/!KSS-ASY2/skupiny.R",
     "project_path": "skupiny.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "4066560121",
     "contents": "",
     "dirty": false,
     "created": 1632154001950.0,
@@ -13,15 +13,15 @@
         "tempName": "Untitled1",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "26,0",
-        "scrollLine": "4"
+        "cursorPosition": "8,0",
+        "scrollLine": "3"
     },
     "folds": "",
-    "lastKnownWriteTime": 1632165867,
+    "lastKnownWriteTime": 1633638417,
     "encoding": "WINDOWS-1250",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1632165867136,
+    "last_content_update": 1633638417656,
     "read_only": false,
     "read_only_alternatives": []
 }
