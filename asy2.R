@@ -176,10 +176,9 @@ vsechny_tabulky = function(data, Excel = TRUE) {
     for (j in (i+1):pp) {  # Druhý projede uvnitø od 'í' plus první po poslední.
       tb = table_as_tibble(data, jména[i], jména[j])  # Uložíme si tibble tabulku do objektu 'tb'
       k = k + 1  # Posuneme poøadové èíslo tabulky o 1.
-      # ifelse(Excel,  # Podle toho, zda je v argumentu funkce uloženo TRUE, nebo FALSE...
-      #        write_xlsx(tb, paste0("tab", k, ".xlsx")),   #... buï uložíme tabulku do Excelu...
-      #        print(tb))  # ...nebo jí jen vytiskneme na obrazovku.
-      print(paste( jména[i], "::", jména[j]))
+      ifelse(Excel,  # Podle toho, zda je v argumentu funkce uloženo TRUE, nebo FALSE...
+             write_xlsx(tb, paste0("tab", k, ".xlsx")),   #... buï uložíme tabulku do Excelu...
+             print(tb))  # ...nebo jí jen vytiskneme na obrazovku.
     }
   }
 }

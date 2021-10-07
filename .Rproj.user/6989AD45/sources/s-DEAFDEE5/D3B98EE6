@@ -3,7 +3,7 @@
     "path": "D:/ownCloud2/!!!Vyuka/!KSS-ASY2/asy2.R",
     "project_path": "asy2.R",
     "type": "r_source",
-    "hash": "3610267564",
+    "hash": "0",
     "contents": "",
     "dirty": false,
     "created": 1633637765796.0,
@@ -12,15 +12,15 @@
     "properties": {
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "11,64",
-        "scrollLine": "0"
+        "cursorPosition": "183,1",
+        "scrollLine": "172"
     },
     "folds": "",
-    "lastKnownWriteTime": 1633642855,
+    "lastKnownWriteTime": 1633644233,
     "encoding": "WINDOWS-1250",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1633642855084,
+    "last_content_update": 1633644233580,
     "read_only": false,
     "read_only_alternatives": []
 }
