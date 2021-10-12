@@ -73,7 +73,7 @@ table_as_tibble = function(data, var1, var2) {
 
 
 # Zakomentovaný kód nefunguje, protože by k nìmu byla tøeba plná data a ta nedáme z ruky:
-# Lucie = select(dfb, Nízkopráh.Kde, Dluhy, Pøehled, starts_with("Pracoval"),
+# Lucie = select(dfb, Nízkopráh.Kde, Dluhy, Pøehled, starts_with("Pracoval"), starts_with("Vyhaz"),
 #                ends_with(".Za80"), ends_with(".Výdrž"), Telefon.Sdìlil)
 # write_xlsx(Lucie, "dataC.xlsx")
 
