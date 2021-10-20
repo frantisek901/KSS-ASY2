@@ -121,6 +121,21 @@ dfv %>% table_as_tibble("Pøátelé.BezDomova", "Prevalence") %>%
 write_xlsx("tab2.xlsx")
 
 
+dfx = select(dfb, Kontakt.Nikdo, Pøátelé.BezDomova, Pøátelé.Bydlí, Partner) %>%
+  mutate(
+    Samotáø = if_else(
+      # Kontakt.Nikdo == "Ano" &
+      (Pøátelé.BezDomova == "0" | Pøátelé.BezDomova == "1-2") &
+      (Pøátelé.Bydlí == "0" | Pøátelé.Bydlí == "1-2"), "Ano", "Ne"),
+    Bez = if_else(Pøátelé.BezDomova == "0" | Pøátelé.BezDomova == "1-2", "Ano", "Ne"),
+    Byd = if_else(Pøátelé.Bydlí == "0" | Pøátelé.Bydlí == "1-2", "Ano", "Ne")
+  )
+
+frq(dfx$Samotáø)
+frq(dfx$Pøátelé.BezDomova)
+frq(dfx$Pøátelé.Bydlí)
+frq(dfx$Kontakt.Nikdo)
+table_as_tibble(dfx, "Kontakt.Nikdo", "Partner")
 
 # Tým Lukáš ---------------------------------------------------------------
 
